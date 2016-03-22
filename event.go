@@ -37,6 +37,8 @@ type Event interface {
 	Dump(w io.Writer)
 
 	Decode(data []byte) error
+
+	GetData() [][]interface{}
 }
 
 type EventError struct {
@@ -196,6 +198,10 @@ func (e *FormatDescriptionEvent) Dump(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+func (e *FormatDescriptionEvent) GetData() (data [][]interface{}) {
+	return data
+}
+
 type RotateEvent struct {
 	Position    uint64
 	NextLogName []byte
@@ -214,6 +220,10 @@ func (e *RotateEvent) Dump(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+func (e *RotateEvent) GetData() (data [][]interface{}) {
+	return data
+}
+
 type XIDEvent struct {
 	XID uint64
 }
@@ -226,6 +236,10 @@ func (e *XIDEvent) Decode(data []byte) error {
 func (e *XIDEvent) Dump(w io.Writer) {
 	fmt.Fprintf(w, "XID: %d\n", e.XID)
 	fmt.Fprintln(w)
+}
+
+func (e *XIDEvent) GetData() (data [][]interface{}) {
+	return data
 }
 
 type QueryEvent struct {
@@ -278,6 +292,10 @@ func (e *QueryEvent) Dump(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+func (e *QueryEvent) GetData() (data [][]interface{}) {
+	return data
+}
+
 type GTIDEvent struct {
 	CommitFlag uint8
 	SID        []byte
@@ -300,6 +318,10 @@ func (e *GTIDEvent) Dump(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+func (e *GTIDEvent) GetData() (data [][]interface{}) {
+	return data
+}
+
 type BeginLoadQueryEvent struct {
 	FileID    uint32
 	BlockData []byte
@@ -320,6 +342,10 @@ func (e *BeginLoadQueryEvent) Dump(w io.Writer) {
 	fmt.Fprintf(w, "File ID: %d\n", e.FileID)
 	fmt.Fprintf(w, "Block data: %s\n", e.BlockData)
 	fmt.Fprintln(w)
+}
+
+func (e *BeginLoadQueryEvent) GetData() (data [][]interface{}) {
+	return data
 }
 
 type ExecuteLoadQueryEvent struct {
@@ -379,6 +405,10 @@ func (e *ExecuteLoadQueryEvent) Dump(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+func (e *ExecuteLoadQueryEvent) GetData() (data [][]interface{}) {
+	return data
+}
+
 // case MARIADB_ANNOTATE_ROWS_EVENT:
 // 	return "MariadbAnnotateRowsEvent"
 
@@ -396,6 +426,10 @@ func (e *MariadbAnnotaeRowsEvent) Dump(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+func (e *MariadbAnnotaeRowsEvent) GetData() (data [][]interface{}) {
+	return data
+}
+
 type MariadbBinlogCheckPointEvent struct {
 	Info []byte
 }
@@ -408,6 +442,10 @@ func (e *MariadbBinlogCheckPointEvent) Decode(data []byte) error {
 func (e *MariadbBinlogCheckPointEvent) Dump(w io.Writer) {
 	fmt.Fprintf(w, "Info: %s\n", e.Info)
 	fmt.Fprintln(w)
+}
+
+func (e *MariadbBinlogCheckPointEvent) GetData() (data [][]interface{}) {
+	return data
 }
 
 type MariadbGTIDEvent struct {
@@ -426,6 +464,10 @@ func (e *MariadbGTIDEvent) Decode(data []byte) error {
 func (e *MariadbGTIDEvent) Dump(w io.Writer) {
 	fmt.Fprintf(w, "GTID: %s\n", e.GTID)
 	fmt.Fprintln(w)
+}
+
+func (e *MariadbGTIDEvent) GetData() (data [][]interface{}) {
+	return data
 }
 
 type MariadbGTIDListEvent struct {
@@ -455,4 +497,8 @@ func (e *MariadbGTIDListEvent) Decode(data []byte) error {
 func (e *MariadbGTIDListEvent) Dump(w io.Writer) {
 	fmt.Fprintf(w, "Lists: %v\n", e.GTIDs)
 	fmt.Fprintln(w)
+}
+
+func (e *MariadbGTIDListEvent) GetData() (data [][]interface{}) {
+	return data
 }

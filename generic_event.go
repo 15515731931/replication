@@ -16,6 +16,10 @@ func (e *GenericEvent) Dump(w io.Writer) {
 	fmt.Fprintln(w)
 }
 
+func (e *GenericEvent) GetData() (data [][]interface{}) {
+	return data
+}
+
 func (e *GenericEvent) Decode(data []byte) error {
 	e.Data = data
 
