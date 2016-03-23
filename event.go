@@ -293,7 +293,10 @@ func (e *QueryEvent) Dump(w io.Writer) {
 }
 
 func (e *QueryEvent) GetData() (data [][]interface{}) {
-	return data
+	row := make([]interface{}, 1)
+	row[0] = string(e.Query)
+	data = append(data, row)
+	return
 }
 
 type GTIDEvent struct {

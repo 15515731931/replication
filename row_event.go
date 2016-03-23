@@ -194,7 +194,7 @@ func (e *TableMapEvent) GetData() (data [][]interface{}) {
 	row[1] = string(e.Table)
 	row[2] = e.ColumnType
 	data = append(data, row)
-	return;
+	return
 }
 
 type RowsEvent struct {
